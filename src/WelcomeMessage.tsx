@@ -4,6 +4,7 @@
 // Propsという名前で定義することが一般的です。
 type Props = {
   name: string;
+  uncompletedCount: number; // 追加
 };
 
 // WelcomeMessage という関数コンポーネントの定義
