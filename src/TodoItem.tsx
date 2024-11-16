@@ -13,20 +13,18 @@ type Props = {
 const TodoItem = (props: Props) => {
   const todo = props.todo;
   return (
-    <div className="flex items-center">
-      <div className="flex justify-start">
-        <div className="flex items-center">
-          <input
-            type="checkbox"
-            checked={todo.isDone}
-            onChange={(e) => props.updateIsDone(todo.id, e.target.checked)}
-            className="mr-1.5 cursor-pointer rounded-full"
-          />
-        </div>
+    <div className="flex items-center ">
+      <div className="flex items-center">
+        <input
+          type="checkbox"
+          checked={todo.isDone}
+          onChange={(e) => props.updateIsDone(todo.id, e.target.checked)}
+          className="mr-1.5 cursor-pointer rounded-full"
+        />
+      </div>
 
-        <div className="flex items-center">
-          <label>{todo.name}</label>
-        </div>
+      <div className="flex items-center">
+        <label>{todo.name}</label>
       </div>
 
       <div className="flex-col flex-center">
