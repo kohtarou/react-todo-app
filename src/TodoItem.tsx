@@ -13,7 +13,7 @@ type Props = {
 const TodoItem = (props: Props) => {
   const todo = props.todo;
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex items-center">
       <div className="flex justify-start">
         <div className="flex items-center">
           <input
