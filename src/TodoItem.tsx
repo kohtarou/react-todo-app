@@ -27,17 +27,17 @@ const TodoItem = (props: Props) => {
         <div className="flex items-center">
           <label>{todo.name}</label>
         </div>
+      </div>
 
-        <div className="flex-col flex-center">
-          <div class-Nam="ml-suto">優先度:{todo.priority}</div>
+      <div className="flex-col flex-center">
+        <div class-Nam="ml-suto">優先度:{todo.priority}</div>
 
-          <div>
-            {todo.deadline && (
-              <div className="ml-auto">
-                期限: {dayjs(todo.deadline).format("YYYY年M月D日 H時m分")}
-              </div>
-            )}
-          </div>
+        <div>
+          {todo.deadline && (
+            <div className="ml-auto">
+              期限: {dayjs(todo.deadline).format("YYYY年M月D日 H時m分")}
+            </div>
+          )}
         </div>
       </div>
 
