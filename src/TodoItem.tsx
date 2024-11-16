@@ -39,15 +39,15 @@ const TodoItem = (props: Props) => {
             </div>
           </div>
         </div>
+      </div>
 
-        <div>
-          <button
-            onClick={() => props.remove(todo.id)}
-            className="flex flex-row space-x-2 item-center rounded-md bg-slate-200 px-2 py-1 text-sm font-bold text-white hover:bg-red-500"
-          >
-            削除
-          </button>
-        </div>
+      <div>
+        <button
+          onClick={() => props.remove(todo.id)}
+          className="flex flex-row space-x-2 item-center rounded-md bg-slate-200 px-2 py-1 text-sm font-bold text-white hover:bg-red-500"
+        >
+          削除
+        </button>
       </div>
     </div>
   );
