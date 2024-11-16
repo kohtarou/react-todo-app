@@ -27,12 +27,12 @@ const TodoItem = (props: Props) => {
         <div className="flex items-center">
           <label>{todo.name}</label>
 
-          <div className="flex-col">
-            <div>優先度:{todo.priority}</div>
+          <div className="flex-col flex-center">
+            <div class-Nam="ml-suto">優先度:{todo.priority}</div>
 
             <div>
               {todo.deadline && (
-                <div className="ml-4 flex items-center text-sm text-slate-500">
+                <div className="ml-auto">
                   期限: {dayjs(todo.deadline).format("YYYY年M月D日 H時m分")}
                 </div>
               )}
@@ -43,7 +43,7 @@ const TodoItem = (props: Props) => {
         <div>
           <button
             onClick={() => props.remove(todo.id)}
-            className="rounded-md bg-slate-200 px-2 py-1 text-sm font-bold text-white hover:bg-red-500"
+            className="flex flex-row space-x-2 item-center rounded-md bg-slate-200 px-2 py-1 text-sm font-bold text-white hover:bg-red-500"
           >
             削除
           </button>
