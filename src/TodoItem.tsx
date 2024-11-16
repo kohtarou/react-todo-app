@@ -1,10 +1,13 @@
 //import React from "react";
 import { Todo } from "./types";
+import dayjs from "dayjs";
 
 type Props = {
   todo: Todo;
   updateIsDone: (id: string, value: boolean) => void;
   remove: (id: string) => void;
+  priority: number;
+  deadline: Date | null;
 };
 
 const TodoItem = (props: Props) => {
@@ -19,7 +22,14 @@ const TodoItem = (props: Props) => {
           className="mr-1.5 cursor-pointer"
         />
         {todo.name}
+        {todo.priority}
       </div>
+      {todo.deadline && (
+        <div className="ml-4 flex items-center text-sm text-slate-500">
+          期限: {dayjs(todo.deadline).format("YYYY年M月D日 H時m分")}
+        </div>
+      )}
+
       <div>
         <button
           onClick={() => props.remove(todo.id)}

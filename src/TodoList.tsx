@@ -27,6 +27,8 @@ const TodoList = (props: Props) => {
           todo={todo}
           remove={props.remove}
           updateIsDone={props.updateIsDone}
+          priority={todo.priority}
+          deadline={todo.deadline}
         />
       ))}
     </div>

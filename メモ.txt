@@ -1,0 +1,7 @@
+・GiHub Pagesに反映したいときにする
+
+npm run predeploy
+
+npm run deploy
+
+・取り組み時間(予想)の表示
