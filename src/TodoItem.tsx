@@ -14,9 +14,9 @@ const TodoItem = (props: Props) => {
   const todo = props.todo;
 
   return (
-    <div className="flex justify-between items-center rounded-[20px] border-0 border-white">
+    <div className="flex justify-between items-center p-2 border-b border-2 border-black rounded-[20px]">
       {" "}
-      {/* items-start を items-center に変更 */}
+      {/* Tailwind CSS クラスを追加 */}
       <div className="flex items-center">
         <input
           type="checkbox"
@@ -26,13 +26,13 @@ const TodoItem = (props: Props) => {
         />
         <label className="mr-4">{todo.name}</label>
       </div>
-      <div className="flex items-center mx-4 space-x-4">
+      <div className="flex flex-col items-start mx-4 space-y-1">
         {" "}
-        {/* flex-col を削除し、space-x-4 を追加 */}
+        {/* flex-col を追加し、space-y-1 を追加 */}
         <div className="text-sm">優先度: {todo.priority}</div>
         {todo.deadline && (
           <div className="text-sm">
-            期限: {dayjs(todo.deadline).format("YYYY/M/D/ H:m")}
+            期限: {dayjs(todo.deadline).format("YYYY年M月D日 H時m分")}
           </div>
         )}
       </div>
