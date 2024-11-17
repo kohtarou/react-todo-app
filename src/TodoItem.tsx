@@ -14,28 +14,21 @@ const TodoItem = (props: Props) => {
   const todo = props.todo;
 
   return (
-    <div className="flex justify-between items-start p-2 border-b">
+    <div className="flex justify-between items-center p-2 border-b">
+      {" "}
+      {/* items-start を items-center に変更 */}
       <div className="flex items-center">
         <input
           type="checkbox"
           checked={todo.isDone}
           onChange={(e) => props.updateIsDone(todo.id, e.target.checked)}
-          className="mr-2 cursor-pointer"
-          style={{
-            width: "1.25rem", // サイズを調整
-            height: "1.25rem", // サイズを調整
-            borderRadius: "50%", // 丸くする
-            border: "2px solid #ccc", // 枠線の色を調整
-            appearance: "none", // デフォルトのスタイルを無効化
-            WebkitAppearance: "none", // デフォルトのスタイルを無効化
-            MozAppearance: "none", // デフォルトのスタイルを無効化
-            cursor: "pointer", // カーソルをポインターに変更
-          }}
+          className="mr-2 cursor-pointer w-5 h-5 rounded-full border-2 border-gray-400 appearance-none checked:bg-blue-500" // Tailwind CSS クラスを使用
         />
         <label className="mr-4">{todo.name}</label>
       </div>
-
-      <div className="flex flex-col items-center mx-4">
+      <div className="flex items-center mx-4 space-x-4">
+        {" "}
+        {/* flex-col を削除し、space-x-4 を追加 */}
         <div className="text-sm">優先度: {todo.priority}</div>
         {todo.deadline && (
           <div className="text-sm">
@@ -43,7 +36,6 @@ const TodoItem = (props: Props) => {
           </div>
         )}
       </div>
-
       <div>
         <button
           onClick={() => props.remove(todo.id)}
