@@ -32,7 +32,7 @@ const TodoItem = (props: Props) => {
         <div className="text-sm">優先度: {todo.priority}</div>
         {todo.deadline && (
           <div className="text-sm">
-            期限: {dayjs(todo.deadline).format("YYYY年M月D日 H時m分")}
+            期限: {dayjs(todo.deadline).format("YYYY/M/D H:m")}
           </div>
         )}
       </div>
