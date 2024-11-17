@@ -14,7 +14,7 @@ const TodoItem = (props: Props) => {
   const todo = props.todo;
 
   return (
-    <div className="flex justify-between items-center rounded-[20px] border-2 border-black">
+    <div className="flex justify-between items-center rounded-[20px] border-0 border-white">
       {" "}
       {/* items-start を items-center に変更 */}
       <div className="flex items-center">
