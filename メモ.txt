@@ -5,3 +5,7 @@ npm run predeploy
 npm run deploy
 
 ・取り組み時間(予想)の表示
+
+削除ボタン右上丸型バツ入り配置
+
+編集ボタンの追加

@@ -14,7 +14,7 @@ const TodoItem = (props: Props) => {
   const todo = props.todo;
 
   return (
-    <div className="flex justify-between items-center p-4 border-2 border-white rounded-[20px]">
+    <div className="flex justify-between items-center p-4 border-2 border-[#afafaf] rounded-[20px]">
       {" "}
       {/* Tailwind CSS クラスを追加 */}
       <div className="flex items-center">
@@ -26,7 +26,7 @@ const TodoItem = (props: Props) => {
         />
         <label className="mr-4">{todo.name}</label>
       </div>
-      <div className="flex items-center mx-4 space-x-4">
+      <div className="flex flex-col items-start mx-4">
         {" "}
         {/* flex-col を削除し、space-x-4 を追加 */}
         <div className="text-sm">優先度: {todo.priority}</div>
