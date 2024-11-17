@@ -14,7 +14,7 @@ const TodoItem = (props: Props) => {
   const todo = props.todo;
 
   return (
-    <div className="flex justify-between items-center p-4 border-2 border-black rounded-[20px]">
+    <div className="flex justify-between items-center p-4 border-2 border-white rounded-[20px]">
       {" "}
       {/* Tailwind CSS クラスを追加 */}
       <div className="flex items-center">
