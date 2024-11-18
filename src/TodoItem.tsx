@@ -1,14 +1,13 @@
-import React from "react";
+//import React from "react";
 import { Todo } from "./types";
 import dayjs from "dayjs";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // 追加
 import {
   faFile,
   faClock,
-  faFaceGrinWide,
   faCircleXmark,
 } from "@fortawesome/free-solid-svg-icons"; // 追加
-import { twMerge } from "tailwind-merge"; // 追加
+//import { twMerge } from "tailwind-merge"; // 追加
 
 type Props = {
   todo: Todo;
