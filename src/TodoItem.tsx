@@ -22,8 +22,8 @@ const TodoItem = (props: Props) => {
 
   return (
     <div
-      className="flex justify-between items-center p-4 border-2 border-black rounded-[20px]"
-      style={{ boxShadow: "3px 3px 10px 0px #6e6e6e" }}
+      className="flex justify-between items-center p-4 border-2 border-[#505050] rounded-[20px]"
+      style={{ boxShadow: "1px 2px 5px 1px #6e6e6e" }}
     >
       <div className="flex items-center">
         <input
