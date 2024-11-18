@@ -21,23 +21,23 @@ const TodoItem = (props: Props) => {
   const todo = props.todo;
 
   return (
-    <div className="flex justify-between items-center p-4 border-1 border-black rounded-[20px] shadow-custom">
+    <div className="flex justify-between items-center p-4 border-2 border-black rounded-[20px] shadow-custom">
       <div className="flex items-center">
         <input
           type="checkbox"
           checked={todo.isDone}
           onChange={(e) => props.updateIsDone(todo.id, e.target.checked)}
-          className="mr-2 cursor-pointer w-5 h-5 rounded-full border-1 border-black  appearance-none checked:bg-blue-500" // Tailwind CSS クラスを使用
+          className="mr-2 cursor-pointer w-5 h-5 rounded-full border-2 border-black  appearance-none checked:bg-blue-500" // Tailwind CSS クラスを使用
         />
-        <label className="mr-4 font-bold">{todo.name}</label>
+        <label className="mr-4 font-bold text-lg">{todo.name}</label>
       </div>
       <div className="flex flex-col items-start mx-4">
-        <div className="text-sm">
+        <div className="text-base">
           <FontAwesomeIcon icon={faBalanceScale} />
           優先度: {todo.priority}
         </div>
         {todo.deadline && (
-          <div className="text-sm">
+          <div className="text-base">
             <FontAwesomeIcon icon={faClock} className="mr-1" />{" "}
             {/* アイコンを追加 */}
             期限: {dayjs(todo.deadline).format("YYYY/M/D HH:mm")}
