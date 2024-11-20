@@ -5,9 +5,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // 追加
 import {
   faBalanceScale,
   faClock,
-  faCircleXmark,
   faFilePen, // 追加
 } from "@fortawesome/free-solid-svg-icons"; // 追加
+import { faCircleXmark as faRegularCircleXmark } from "@fortawesome/free-regular-svg-icons"; // 追加
 //import { twMerge } from "tailwind-merge"; // 追加
 
 type Props = {
@@ -31,7 +31,7 @@ const TodoItem = (props: Props) => {
         onClick={() => props.remove(todo.id)}
         className="absolute -top-2 -right-2 flex items-center justify-center transform scale-125" // ボタンのスタイルを変更
       >
-        <FontAwesomeIcon icon={faCircleXmark} /> {/* アイコンを追加 */}
+        <FontAwesomeIcon icon={faRegularCircleXmark} /> {/* アイコンを追加 */}
       </button>
       <div className="flex items-center">
         <input
