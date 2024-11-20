@@ -5,16 +5,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // 追加
 import {
   faBalanceScale,
   faClock,
-  faFilePen, // 追加
+  faFilePen,
+  faCircleXmark, // 追加
 } from "@fortawesome/free-solid-svg-icons"; // 追加
-import { faCircleXmark as faRegularCircleXmark } from "@fortawesome/free-regular-svg-icons"; // 追加
 //import { twMerge } from "tailwind-merge"; // 追加
 
 type Props = {
   todo: Todo;
   updateIsDone: (id: string, value: boolean) => void;
   remove: (id: string) => void;
-  edit: (id: string) => void; // 追加
+  edit: (id: string) => void;
   priority: number;
   deadline: Date | null;
 };
@@ -31,7 +31,7 @@ const TodoItem = (props: Props) => {
         onClick={() => props.remove(todo.id)}
         className="absolute -top-2 -right-2 flex items-center justify-center transform scale-125" // ボタンのスタイルを変更
       >
-        <FontAwesomeIcon icon={faRegularCircleXmark} /> {/* アイコンを追加 */}
+        <FontAwesomeIcon icon={faCircleXmark} /> {/* アイコンを追加 */}
       </button>
       <div className="flex items-center">
         <input
@@ -49,9 +49,8 @@ const TodoItem = (props: Props) => {
         </div>
         {todo.deadline && (
           <div className="text-base">
-            <FontAwesomeIcon icon={faClock} className="mr-1" />{" "}
-            {/* アイコンを追加 */}
-            期限: {dayjs(todo.deadline).format("YYYY/M/D HH:mm")}
+            <FontAwesomeIcon icon={faClock} className="mr-1" /> 期限:{" "}
+            {dayjs(todo.deadline).format("YYYY/M/D HH:mm")}
           </div>
         )}
       </div>
