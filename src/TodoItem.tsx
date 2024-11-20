@@ -56,11 +56,11 @@ const TodoItem = (props: Props) => {
         )}
       </div>
       <div
-        className="border-2 border-[#404040] rounded-[10px] p-1" // ボタンのスタイルを変更
+        className="border border-[#404040] rounded-[10px] p-1" // ボタンのスタイルを変更
       >
         <button
           onClick={() => props.edit(todo.id)} // 編集ボタンのクリックイベント
-          className="flex items-center justify-center w-8 h-8" // ボタンのサイズを調整
+          className="flex items-center justify-center w-4 h-4" // ボタンのサイズを調整
         >
           <FontAwesomeIcon icon={faFilePen} />
         </button>
