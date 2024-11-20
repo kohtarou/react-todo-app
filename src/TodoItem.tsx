@@ -58,7 +58,7 @@ const TodoItem = (props: Props) => {
       <div>
         <button
           onClick={() => props.edit(todo.id)} // 編集ボタンのクリックイベント
-          className="rounded-full bg-blue-500 p-2 text-white hover:bg-blue-600" // ボタンのスタイルを変更
+          className="border-2 border-[#404040] p-2 text-black" // ボタンのスタイルを変更
         >
           <FontAwesomeIcon icon={faEdit} /> {/* アイコンを追加 */}
         </button>
