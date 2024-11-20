@@ -92,6 +92,17 @@ const App = () => {
     setTodos(updatedTodos);
   };
 
+  const edit = (id: string) => {
+    // 編集機能の実装
+    const todoToEdit = todos.find((todo) => todo.id === id);
+    if (todoToEdit) {
+      setNewTodoName(todoToEdit.name);
+      setNewTodoPriority(todoToEdit.priority);
+      setNewTodoDeadline(todoToEdit.deadline);
+      remove(id); // 編集時に一旦削除
+    }
+  };
+
   // 追加: addNewTodo関数の実装
   const addNewTodo = () => {
     const err = isValidTodoName(newTodoName);
@@ -119,7 +130,13 @@ const App = () => {
       <h1 className="mb-4 text-2xl font-bold">TodoApp</h1>
       <p className="mb-4 text-lg">未完了のタスク: {uncompletedCount}</p>{" "}
       {/* 未完了のタスク数を表示 */}
-      <TodoList todos={todos} updateIsDone={updateIsDone} remove={remove} />
+      <TodoList
+        todos={todos}
+        updateIsDone={updateIsDone}
+        remove={remove}
+        edit={edit}
+      />{" "}
+      {/* edit を追加 */}
       <button
         type="button"
         onClick={removeCompletedTodos}

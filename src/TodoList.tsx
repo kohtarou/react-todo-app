@@ -6,6 +6,7 @@ type Props = {
   todos: Todo[];
   updateIsDone: (id: string, value: boolean) => void;
   remove: (id: string) => void;
+  edit: (id: string) => void; // ◀◀ 追加
 };
 
 const TodoList = (props: Props) => {
@@ -27,6 +28,7 @@ const TodoList = (props: Props) => {
           todo={todo}
           remove={props.remove}
           updateIsDone={props.updateIsDone}
+          edit={props.edit} // ◀◀ 追加
           priority={todo.priority}
           deadline={todo.deadline}
         />

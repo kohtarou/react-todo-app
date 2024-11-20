@@ -6,6 +6,7 @@ import {
   faBalanceScale,
   faClock,
   faCircleXmark,
+  faEdit, // 追加
 } from "@fortawesome/free-solid-svg-icons"; // 追加
 //import { twMerge } from "tailwind-merge"; // 追加
 
@@ -13,6 +14,7 @@ type Props = {
   todo: Todo;
   updateIsDone: (id: string, value: boolean) => void;
   remove: (id: string) => void;
+  edit: (id: string) => void; // 追加
   priority: number;
   deadline: Date | null;
 };
@@ -22,15 +24,21 @@ const TodoItem = (props: Props) => {
 
   return (
     <div
-      className="flex justify-between items-center p-2 border-2 border-[#303030] rounded-[10px]"
-      style={{ boxShadow: "3px 3px 5px 1px #969696" }}
+      className="relative flex justify-between items-center p-4 border-2 border-[#303030] rounded-[10px]"
+      style={{ boxShadow: "3px 3px 10px 0px #6e6e6e" }} // インラインスタイルを追加
     >
+      <button
+        onClick={() => props.remove(todo.id)}
+        className="absolute top-2 right-2" // ボタンのスタイルを変更
+      >
+        <FontAwesomeIcon icon={faCircleXmark} /> {/* アイコンを追加 */}
+      </button>
       <div className="flex items-center">
         <input
           type="checkbox"
           checked={todo.isDone}
           onChange={(e) => props.updateIsDone(todo.id, e.target.checked)}
-          className="mr-2 cursor-pointer w-5 h-5 rounded-full border-2 border-black  appearance-none checked:bg-blue-500" // Tailwind CSS クラスを使用
+          className="mr-2 cursor-pointer w-5 h-5 rounded-full border-2 border-black appearance-none checked:bg-blue-500" // Tailwind CSS クラスを使用
         />
         <label className="mr-4 font-bold text-lg">{todo.name}</label>
       </div>
@@ -49,10 +57,10 @@ const TodoItem = (props: Props) => {
       </div>
       <div>
         <button
-          onClick={() => props.remove(todo.id)}
-          //className="rounded-full bg-red-500 p-2 text-white hover:bg-red-600"  ボタンのスタイルを変更
+          onClick={() => props.edit(todo.id)} // 編集ボタンのクリックイベント
+          className="rounded-full bg-blue-500 p-2 text-white hover:bg-blue-600" // ボタンのスタイルを変更
         >
-          <FontAwesomeIcon icon={faCircleXmark} /> {/* アイコンを追加 */}
+          <FontAwesomeIcon icon={faEdit} /> {/* アイコンを追加 */}
         </button>
       </div>
     </div>
