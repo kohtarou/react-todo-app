@@ -24,7 +24,7 @@ const TodoItem = (props: Props) => {
 
   return (
     <div
-      className="relative flex justify-between items-center p-4 border-2 border-[#303030] rounded-[10px]"
+      className="relative flex justify-between items-center p-4 border border-[#303030] rounded-[10px]"
       style={{ boxShadow: "3px 3px 10px 0px #6e6e6e" }} // インラインスタイルを追加
     >
       <button
@@ -56,10 +56,11 @@ const TodoItem = (props: Props) => {
         )}
       </div>
       <div
-        className="border-2 border-[#404040]" // ボタンのスタイルを変更
+        className="border-2 border-[#404040] rounded-[10px] p-1" // ボタンのスタイルを変更
       >
         <button
           onClick={() => props.edit(todo.id)} // 編集ボタンのクリックイベント
+          className="flex items-center justify-center w-8 h-8" // ボタンのサイズを調整
         >
           <FontAwesomeIcon icon={faFilePen} />
         </button>
