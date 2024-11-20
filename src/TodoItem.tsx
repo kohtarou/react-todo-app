@@ -6,7 +6,7 @@ import {
   faBalanceScale,
   faClock,
   faCircleXmark,
-  faEdit, // 追加
+  faFilePen, // 追加
 } from "@fortawesome/free-solid-svg-icons"; // 追加
 //import { twMerge } from "tailwind-merge"; // 追加
 
@@ -29,7 +29,7 @@ const TodoItem = (props: Props) => {
     >
       <button
         onClick={() => props.remove(todo.id)}
-        className="absolute -top-2 -right-2 w-8 h-8 flex items-center justify-center" // ボタンのスタイルを変更
+        className="absolute -top-2 -right-2 flex items-center justify-center transform scale-125" // ボタンのスタイルを変更
       >
         <FontAwesomeIcon icon={faCircleXmark} /> {/* アイコンを追加 */}
       </button>
@@ -55,12 +55,13 @@ const TodoItem = (props: Props) => {
           </div>
         )}
       </div>
-      <div>
+      <div
+        className="border-2 border-[#404040]" // ボタンのスタイルを変更
+      >
         <button
           onClick={() => props.edit(todo.id)} // 編集ボタンのクリックイベント
-          className="border-2 border-[#404040] p-2 text-black" // ボタンのスタイルを変更
         >
-          <FontAwesomeIcon icon={faEdit} /> {/* アイコンを追加 */}
+          <FontAwesomeIcon icon={faFilePen} />
         </button>
       </div>
     </div>
