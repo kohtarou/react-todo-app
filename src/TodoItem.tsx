@@ -29,7 +29,7 @@ const TodoItem = (props: Props) => {
     >
       <button
         onClick={() => props.remove(todo.id)}
-        className="absolute -top-2 -right-2 flex items-center justify-center transform scale-125" // ボタンのスタイルを変更
+        className="absolute -top-2 -right-2 flex items-center justify-center transform scale-150 bg-white" // ボタンのスタイルを変更
       >
         <FontAwesomeIcon icon={faCircleXmark} /> {/* アイコンを追加 */}
       </button>
