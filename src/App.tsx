@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"; //追加
 import { Todo } from "./types";
 import { initTodos } from "./initTodos";
-import WelcomeMessage from "./WelcomeMessage";
+//import WelcomeMessage from "./WelcomeMessage";
 import TodoList from "./TodoList";
 import { v4 as uuid } from "uuid";
 import dayjs from "dayjs"; // ◀◀ 追加
@@ -117,9 +117,9 @@ const App = () => {
   return (
     <div className="mx-4 mt-10 max-w-2xl md:mx-auto">
       <h1 className="mb-4 text-2xl font-bold">TodoApp</h1>
-
+      <p className="mb-4 text-lg">未完了のタスク: {uncompletedCount}</p>{" "}
+      {/* 未完了のタスク数を表示 */}
       <TodoList todos={todos} updateIsDone={updateIsDone} remove={remove} />
-
       <button
         type="button"
         onClick={removeCompletedTodos}
@@ -129,7 +129,6 @@ const App = () => {
       >
         完了済みのタスクを削除
       </button>
-
       {/* タスク追加関連のUI実装 ここから... */}
       <div className="mt-5 space-y-2 rounded-md border p-3">
         <h2 className="text-lg font-bold">新しいタスクの追加</h2>
