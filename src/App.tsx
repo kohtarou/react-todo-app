@@ -15,6 +15,7 @@ const App = () => {
   const [newTodoDeadline, setNewTodoDeadline] = useState<Date | null>(null);
   const [newTodoNameError, setNewTodoNameError] = useState("");
   const [editTodoId, setEditTodoId] = useState<string | null>(null); // 追加
+  const [showAddTodo, setShowAddTodo] = useState(false); // 追加
 
   const [initialized, setInitialized] = useState(false);
   const localStorageKey = "TodoApp";
@@ -92,6 +93,7 @@ const App = () => {
       setNewTodoPriority(todoToEdit.priority);
       setNewTodoDeadline(todoToEdit.deadline);
       setEditTodoId(id); // 編集モードに入るためのIDを設定
+      setShowAddTodo(true); // 追加画面を表示
     }
   };
 
@@ -132,6 +134,7 @@ const App = () => {
     setNewTodoName("");
     setNewTodoPriority(3);
     setNewTodoDeadline(null);
+    setShowAddTodo(false); // 追加画面を非表示
   };
 
   return (
@@ -151,75 +154,97 @@ const App = () => {
       >
         完了済みのタスクを削除
       </button>
-      <div className="mt-5 space-y-2 rounded-md border p-3">
-        <h2 className="text-lg font-bold">新しいタスクの追加</h2>
-        <div>
-          <div className="flex items-center space-x-2">
-            <label className="font-bold" htmlFor="newTodoName">
-              名前
-            </label>
-            <input
-              id="newTodoName"
-              type="text"
-              value={newTodoName}
-              onChange={updateNewTodoName}
-              className={twMerge(
-                "grow rounded-md border p-2",
-                newTodoNameError && "border-red-500 outline-red-500"
+      <button
+        type="button"
+        onClick={() => setShowAddTodo(true)} // 追加画面を表示
+        className="mt-5 rounded-md bg-indigo-500 px-3 py-1 font-bold text-white hover:bg-indigo-600"
+      >
+        Todoの追加
+      </button>
+      {showAddTodo && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded-md shadow-md max-w-md w-full">
+            <h2 className="text-lg font-bold mb-4">
+              {editTodoId ? "タスクの編集" : "新しいタスクの追加"}
+            </h2>
+            <div>
+              <div className="flex items-center space-x-2 mb-4">
+                <label className="font-bold" htmlFor="newTodoName">
+                  名前
+                </label>
+                <input
+                  id="newTodoName"
+                  type="text"
+                  value={newTodoName}
+                  onChange={updateNewTodoName}
+                  className={twMerge(
+                    "grow rounded-md border p-2",
+                    newTodoNameError && "border-red-500 outline-red-500"
+                  )}
+                  placeholder="2文字以上、32文字以内で入力してください"
+                />
+              </div>
+              {newTodoNameError && (
+                <div className="ml-10 flex items-center space-x-1 text-sm font-bold text-red-500 mb-4">
+                  <FontAwesomeIcon
+                    icon={faTriangleExclamation}
+                    className="mr-0.5"
+                  />
+                  <div>{newTodoNameError}</div>
+                </div>
               )}
-              placeholder="2文字以上、32文字以内で入力してください"
-            />
-          </div>
-          {newTodoNameError && (
-            <div className="ml-10 flex items-center space-x-1 text-sm font-bold text-red-500 ">
-              <FontAwesomeIcon
-                icon={faTriangleExclamation}
-                className="mr-0.5"
-              />
-              <div>{newTodoNameError}</div>
             </div>
-          )}
-        </div>
-        <div className="flex gap-5">
-          <div className="font-bold">優先度</div>
-          {["高", "中", "低"].map((value, index) => (
-            <label key={value} className="flex items-center space-x-1">
+            <div className="flex gap-5 mb-4">
+              <div className="font-bold">優先度</div>
+              {["高", "中", "低"].map((value, index) => (
+                <label key={value} className="flex items-center space-x-1">
+                  <input
+                    id={`priority-${value}`}
+                    name="priorityGroup"
+                    type="radio"
+                    value={index + 1}
+                    checked={newTodoPriority === index + 1}
+                    onChange={updateNewTodoPriority}
+                  />
+                  <span>{value}</span>
+                </label>
+              ))}
+            </div>
+            <div className="flex items-center gap-x-2 mb-4">
+              <label htmlFor="deadline" className="font-bold">
+                期限
+              </label>
               <input
-                id={`priority-${value}`}
-                name="priorityGroup"
-                type="radio"
-                value={index + 1}
-                checked={newTodoPriority === index + 1}
-                onChange={updateNewTodoPriority}
+                type="datetime-local"
+                id="deadline"
+                value={
+                  newTodoDeadline
+                    ? dayjs(newTodoDeadline).format("YYYY-MM-DDTHH:mm:ss")
+                    : ""
+                }
+                onChange={updateDeadline}
+                className="rounded-md border border-gray-400 px-2 py-0.5"
               />
-              <span>{value}</span>
-            </label>
-          ))}
+            </div>
+            <div className="flex justify-end space-x-2">
+              <button
+                type="button"
+                onClick={() => setShowAddTodo(false)} // 追加画面を非表示
+                className="rounded-md bg-gray-500 px-3 py-1 font-bold text-white hover:bg-gray-600"
+              >
+                キャンセル
+              </button>
+              <button
+                type="button"
+                onClick={addNewTodo}
+                className="rounded-md bg-indigo-500 px-3 py-1 font-bold text-white hover:bg-indigo-600"
+              >
+                {editTodoId ? "更新" : "追加"}
+              </button>
+            </div>
+          </div>
         </div>
-        <div className="flex items-center gap-x-2">
-          <label htmlFor="deadline" className="font-bold">
-            期限
-          </label>
-          <input
-            type="datetime-local"
-            id="deadline"
-            value={
-              newTodoDeadline
-                ? dayjs(newTodoDeadline).format("YYYY-MM-DDTHH:mm:ss")
-                : ""
-            }
-            onChange={updateDeadline}
-            className="rounded-md border border-gray-400 px-2 py-0.5"
-          />
-        </div>
-        <button
-          type="button"
-          onClick={addNewTodo}
-          className="rounded-md bg-indigo-500 px-3 py-1 font-bold text-white hover:bg-indigo-600"
-        >
-          {editTodoId ? "更新" : "追加"}
-        </button>
-      </div>
+      )}
     </div>
   );
 };
