@@ -59,7 +59,7 @@ const TodoItem = (props: Props) => {
       >
         <button
           onClick={() => props.edit(todo.id)} // 編集ボタンのクリックイベント
-          className="flex items-center justify-center w-4 h-4" // ボタンのサイズを調整
+          className="flex items-center justify-center w-8 h-4" // ボタンのサイズを調整
         >
           <FontAwesomeIcon icon={faFilePen} />
           編集
