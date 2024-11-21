@@ -6,7 +6,10 @@ import { v4 as uuid } from "uuid";
 import dayjs from "dayjs";
 import { twMerge } from "tailwind-merge";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
+import {
+  faTriangleExclamation,
+  faPlus,
+} from "@fortawesome/free-solid-svg-icons"; // faPlus アイコンを追加
 
 const App = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -137,6 +140,14 @@ const App = () => {
     setShowAddTodo(false); // 追加画面を非表示
   };
 
+  const handleAddTodoClick = () => {
+    setNewTodoName("");
+    setNewTodoPriority(3);
+    setNewTodoDeadline(null);
+    setEditTodoId(null); // 編集モードをリセット
+    setShowAddTodo(true); // 追加画面を表示
+  };
+
   return (
     <div className="mx-4 mt-10 max-w-2xl md:mx-auto">
       <h1 className="mb-4 text-2xl font-bold">TodoApp</h1>
@@ -156,9 +167,11 @@ const App = () => {
       </button>
       <button
         type="button"
-        onClick={() => setShowAddTodo(true)} // 追加画面を表示
-        className="mt-5 rounded-md bg-indigo-500 px-3 py-1 font-bold text-white hover:bg-indigo-600"
+        onClick={handleAddTodoClick} // 追加画面を表示
+        className="mt-5 flex items-center justify-center rounded-md bg-indigo-500 px-3 py-1 font-bold text-white hover:bg-indigo-600"
       >
+        <FontAwesomeIcon icon={faPlus} className="mr-2" />{" "}
+        {/* アイコンを追加 */}
         Todoの追加
       </button>
       {showAddTodo && (
