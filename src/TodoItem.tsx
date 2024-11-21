@@ -29,7 +29,7 @@ const TodoItem = (props: Props) => {
     >
       <button
         onClick={() => props.remove(todo.id)}
-        className="absolute -top-2 -right-2 flex items-center justify-center transform scale-150 bg-white rounded-full" // ボタンのスタイルを変更
+        className="absolute -top-2 -right-2 flex items-center justify-center transform scale-125 bg-white rounded-full" // ボタンのスタイルを変更
       >
         <FontAwesomeIcon icon={faCircleXmark} /> {/* アイコンを追加 */}
       </button>
@@ -55,7 +55,7 @@ const TodoItem = (props: Props) => {
         )}
       </div>
       <div
-        className="border border-[#404040] rounded-[10px] p-1" // ボタンのスタイルを変更
+        className="border border-[#404040] rounded-[10px] p-1 hover:bg-[#DCE6FA]" // ボタンのスタイルを変更
       >
         <button
           onClick={() => props.edit(todo.id)} // 編集ボタンのクリックイベント
