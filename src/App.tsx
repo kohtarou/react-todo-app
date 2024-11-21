@@ -158,22 +158,24 @@ const App = () => {
         remove={remove}
         edit={edit}
       />
-      <button
-        type="button"
-        onClick={removeCompletedTodos}
-        className="mt-5 rounded-md bg-red-500 px-3 py-1 font-bold text-white hover:bg-red-600"
-      >
-        完了済みのタスクを削除
-      </button>
-      <button
-        type="button"
-        onClick={handleAddTodoClick} // 追加画面を表示
-        className="mt-5 flex items-center justify-center rounded-md bg-indigo-500 px-3 py-1 font-bold text-white hover:bg-indigo-600"
-      >
-        <FontAwesomeIcon icon={faPlus} className="mr-2" />{" "}
-        {/* アイコンを追加 */}
-        Todoの追加
-      </button>
+      <div className="mt-5 flex justify-between">
+        <button
+          type="button"
+          onClick={handleAddTodoClick} // 追加画面を表示
+          className="flex items-center justify-center rounded-md bg-indigo-500 px-3 py-1 font-bold text-white hover:bg-indigo-600"
+        >
+          <FontAwesomeIcon icon={faPlus} className="mr-2" />{" "}
+          {/* アイコンを追加 */}
+          Todoの追加
+        </button>
+        <button
+          type="button"
+          onClick={removeCompletedTodos}
+          className="rounded-md bg-red-500 px-3 py-1 font-bold text-white hover:bg-red-600"
+        >
+          完了済みのタスクを削除
+        </button>
+      </div>
       {showAddTodo && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white p-6 rounded-md shadow-md max-w-md w-full">
