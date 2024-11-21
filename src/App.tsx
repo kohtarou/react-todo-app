@@ -1,25 +1,24 @@
-import { useState, useEffect } from "react"; //追加
+import { useState, useEffect } from "react";
 import { Todo } from "./types";
 import { initTodos } from "./initTodos";
-//import WelcomeMessage from "./WelcomeMessage";
 import TodoList from "./TodoList";
 import { v4 as uuid } from "uuid";
-import dayjs from "dayjs"; // ◀◀ 追加
-import { twMerge } from "tailwind-merge"; // ◀◀ 追加
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // ◀◀ 追加
-import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons"; // ◀◀ 追加
+import dayjs from "dayjs";
+import { twMerge } from "tailwind-merge";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
 
 const App = () => {
-  const [todos, setTodos] = useState<Todo[]>([]); // ◀◀ 編集
+  const [todos, setTodos] = useState<Todo[]>([]);
   const [newTodoName, setNewTodoName] = useState("");
-  const [newTodoPriority, setNewTodoPriority] = useState(3); // ◀◀ 追加
-  const [newTodoDeadline, setNewTodoDeadline] = useState<Date | null>(null); // ◀◀ 追加
+  const [newTodoPriority, setNewTodoPriority] = useState(3);
+  const [newTodoDeadline, setNewTodoDeadline] = useState<Date | null>(null);
   const [newTodoNameError, setNewTodoNameError] = useState("");
+  const [editTodoId, setEditTodoId] = useState<string | null>(null); // 追加
 
-  const [initialized, setInitialized] = useState(false); // 追加
-  const localStorageKey = "TodoApp"; // 追加
+  const [initialized, setInitialized] = useState(false);
+  const localStorageKey = "TodoApp";
 
-  // App コンポーネントの初回実行時のみLocalStorageからTodoデータを復元
   useEffect(() => {
     const todoJsonStr = localStorage.getItem(localStorageKey);
     if (todoJsonStr && todoJsonStr !== "[]") {
@@ -30,13 +29,11 @@ const App = () => {
       }));
       setTodos(convertedTodos);
     } else {
-      // LocalStorage にデータがない場合は initTodos をセットする
       setTodos(initTodos);
     }
     setInitialized(true);
   }, []);
 
-  // 状態 todos または initialized に変更があったときTodoデータを保存
   useEffect(() => {
     if (initialized) {
       localStorage.setItem(localStorageKey, JSON.stringify(todos));
@@ -45,7 +42,6 @@ const App = () => {
 
   const uncompletedCount = todos.filter((todo: Todo) => !todo.isDone).length;
 
-  // ▼▼ 追加
   const isValidTodoName = (name: string): string => {
     if (name.length < 2 || name.length > 32) {
       return "2文字以上、32文字以内で入力してください";
@@ -55,26 +51,23 @@ const App = () => {
   };
 
   const updateNewTodoName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //バリデーションなどの処理を入れる
-    setNewTodoNameError(isValidTodoName(e.target.value)); // ◀◀ 追加
+    setNewTodoNameError(isValidTodoName(e.target.value));
     setNewTodoName(e.target.value);
   };
 
-  // 追加
   const updateNewTodoPriority = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewTodoPriority(Number(e.target.value)); // 数値型に変換
+    setNewTodoPriority(Number(e.target.value));
   };
 
   const updateDeadline = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const dt = e.target.value; // UIで日時が未設定のときは空文字列 "" が dt に格納される
-    console.log(`UI操作で日時が "${dt}" (${typeof dt}型) に変更されました。`);
+    const dt = e.target.value;
     setNewTodoDeadline(dt === "" ? null : new Date(dt));
   };
 
   const updateIsDone = (id: string, value: boolean) => {
     const updatedTodos = todos.map((todo) => {
       if (todo.id === id) {
-        return { ...todo, isDone: value }; // スプレッド構文
+        return { ...todo, isDone: value };
       } else {
         return todo;
       }
@@ -93,33 +86,49 @@ const App = () => {
   };
 
   const edit = (id: string) => {
-    // 編集機能の実装
     const todoToEdit = todos.find((todo) => todo.id === id);
     if (todoToEdit) {
       setNewTodoName(todoToEdit.name);
       setNewTodoPriority(todoToEdit.priority);
       setNewTodoDeadline(todoToEdit.deadline);
-      remove(id); // 編集時に一旦削除
+      setEditTodoId(id); // 編集モードに入るためのIDを設定
     }
   };
 
-  // 追加: addNewTodo関数の実装
   const addNewTodo = () => {
     const err = isValidTodoName(newTodoName);
     if (err !== "") {
       setNewTodoNameError(err);
       return;
     }
-    const newTodo: Todo = {
-      id: uuid(),
-      name: newTodoName,
-      isDone: false,
-      priority: newTodoPriority,
-      deadline: newTodoDeadline,
-    };
-    // スプレッド構文を使って、末尾に新タスクを追加した配列を作成
-    const updatedTodos = [...todos, newTodo];
-    setTodos(updatedTodos); // 作成した配列をtodosにセット
+
+    if (editTodoId) {
+      // 編集モードの場合
+      const updatedTodos = todos.map((todo) =>
+        todo.id === editTodoId
+          ? {
+              ...todo,
+              name: newTodoName,
+              priority: newTodoPriority,
+              deadline: newTodoDeadline,
+            }
+          : todo
+      );
+      setTodos(updatedTodos);
+      setEditTodoId(null); // 編集モードを終了
+    } else {
+      // 新規追加モードの場合
+      const newTodo: Todo = {
+        id: uuid(),
+        name: newTodoName,
+        isDone: false,
+        priority: newTodoPriority,
+        deadline: newTodoDeadline,
+      };
+      const updatedTodos = [...todos, newTodo];
+      setTodos(updatedTodos);
+    }
+
     setNewTodoName("");
     setNewTodoPriority(3);
     setNewTodoDeadline(null);
@@ -128,29 +137,22 @@ const App = () => {
   return (
     <div className="mx-4 mt-10 max-w-2xl md:mx-auto">
       <h1 className="mb-4 text-2xl font-bold">TodoApp</h1>
-      <p className="mb-4 text-lg">未完了のタスク: {uncompletedCount}</p>{" "}
-      {/* 未完了のタスク数を表示 */}
+      <p className="mb-4 text-lg">未完了のタスク: {uncompletedCount}</p>
       <TodoList
         todos={todos}
         updateIsDone={updateIsDone}
         remove={remove}
         edit={edit}
-      />{" "}
-      {/* edit を追加 */}
+      />
       <button
         type="button"
         onClick={removeCompletedTodos}
-        className={
-          "mt-5 rounded-md bg-red-500 px-3 py-1 font-bold text-white hover:bg-red-600"
-        }
+        className="mt-5 rounded-md bg-red-500 px-3 py-1 font-bold text-white hover:bg-red-600"
       >
         完了済みのタスクを削除
       </button>
-      {/* タスク追加関連のUI実装 ここから... */}
       <div className="mt-5 space-y-2 rounded-md border p-3">
         <h2 className="text-lg font-bold">新しいタスクの追加</h2>
-
-        {/* 編集: ここから... */}
         <div>
           <div className="flex items-center space-x-2">
             <label className="font-bold" htmlFor="newTodoName">
@@ -178,9 +180,6 @@ const App = () => {
             </div>
           )}
         </div>
-        {/* ...ここまで */}
-
-        {/* ラジオボタンの実装 ここから... */}
         <div className="flex gap-5">
           <div className="font-bold">優先度</div>
           {["高", "中", "低"].map((value, index) => (
@@ -197,9 +196,6 @@ const App = () => {
             </label>
           ))}
         </div>
-        {/* ...ここまで */}
-
-        {/* DateTimeUIの実装 ここから... */}
         <div className="flex items-center gap-x-2">
           <label htmlFor="deadline" className="font-bold">
             期限
@@ -216,17 +212,14 @@ const App = () => {
             className="rounded-md border border-gray-400 px-2 py-0.5"
           />
         </div>
-        {/* ...ここまで */}
-
         <button
           type="button"
-          onClick={addNewTodo} // ボタンを押下したときの処理
+          onClick={addNewTodo}
           className="rounded-md bg-indigo-500 px-3 py-1 font-bold text-white hover:bg-indigo-600"
         >
-          追加
+          {editTodoId ? "更新" : "追加"}
         </button>
       </div>
-      {/* ...ここまで */}
     </div>
   );
 };
