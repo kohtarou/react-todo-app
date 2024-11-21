@@ -158,7 +158,7 @@ const App = () => {
         remove={remove}
         edit={edit}
       />
-      <div className="mt-5 flex justify-between">
+      <div className="mt-5 flex items-center">
         <button
           type="button"
           onClick={handleAddTodoClick} // 追加画面を表示
@@ -171,7 +171,7 @@ const App = () => {
         <button
           type="button"
           onClick={removeCompletedTodos}
-          className="rounded-md bg-red-500 px-3 py-1 font-bold text-white hover:bg-red-600"
+          className="ml-4 rounded-md bg-red-500 px-3 py-1 font-bold text-white hover:bg-red-600"
         >
           完了済みのタスクを削除
         </button>
