@@ -62,7 +62,7 @@ const TodoItem = (props: Props) => {
           className="flex items-center justify-center w-16 h-4" // ボタンのサイズを調整
         >
           <FontAwesomeIcon icon={faFilePen} />
-          <span className="ml-1 scale-75">編集</span>
+          <span className="ml-1 scale-85 font-bold">編集</span>
         </button>
       </div>
     </div>
