@@ -47,10 +47,10 @@ const TodoItem = (props: Props) => {
       <div className="flex flex-col items-start mx-4">
         <div className="text-base">
           <FontAwesomeIcon icon={faBalanceScale} />
-          優先度
-        </div>
-        <div className="space-x-0.5 text-orange-400">
-          {num2star(todo.priority)}
+          <span className="ml-1">優先度</span>
+          <span className="ml-2 space-x-0.5 text-orange-400">
+            {num2star(todo.priority)}
+          </span>
         </div>
         {todo.deadline && (
           <div className="text-base">
