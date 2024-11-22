@@ -35,14 +35,25 @@ const TodoItem = (props: Props) => {
       >
         <FontAwesomeIcon icon={faCircleXmark} /> {/* アイコンを追加 */}
       </button>
-      <div className="flex items-center">
-        <input
-          type="checkbox"
-          checked={todo.isDone}
-          onChange={(e) => props.updateIsDone(todo.id, e.target.checked)}
-          className="mr-2 cursor-pointer w-5 h-5 rounded-full border-2 border-black appearance-none checked:bg-blue-500" // Tailwind CSS クラスを使用
-        />
-        <label className="mr-4 font-bold text-lg">{todo.name}</label>
+      <div className="flex flex-col items-start">
+        <div className="flex items-center">
+          <input
+            type="checkbox"
+            checked={todo.isDone}
+            onChange={(e) => props.updateIsDone(todo.id, e.target.checked)}
+            className="mr-2 cursor-pointer w-5 h-5 rounded-full border-2 border-black appearance-none checked:bg-blue-500" // Tailwind CSS クラスを使用
+          />
+          <label className="mr-4 font-bold text-lg">{todo.name}</label>
+        </div>
+        <div className="text-base mt-1">
+          進捗: {todo.progress}%
+          <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 mt-1">
+            <div
+              className="bg-blue-600 h-2.5 rounded-full"
+              style={{ width: `${todo.progress}%` }}
+            ></div>
+          </div>
+        </div>
       </div>
       <div className="flex flex-col items-start mx-4">
         <div className="text-base">
