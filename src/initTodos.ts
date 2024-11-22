@@ -16,7 +16,7 @@ export const initTodos: Todo[] = [
     isDone: true,
     priority: 3,
     deadline: null, // このTodoには期限を設定しない
-    progress: 100, // 追加
+    progress: 0, // 追加
   },
   {
     id: uuid(),
