@@ -19,6 +19,8 @@ const App = () => {
   const [newTodoNameError, setNewTodoNameError] = useState("");
   const [editTodoId, setEditTodoId] = useState<string | null>(null); // 追加
   const [showAddTodo, setShowAddTodo] = useState(false); // 追加
+  const [sortOption, setSortOption] = useState<string>("priority"); // 追加
+  const [sortOrder, setSortOrder] = useState<string>("asc"); // 追加
 
   const [initialized, setInitialized] = useState(false);
   const localStorageKey = "TodoApp";
@@ -148,12 +150,66 @@ const App = () => {
     setShowAddTodo(true); // 追加画面を表示
   };
 
+  const handleSortOptionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSortOption(e.target.value);
+  };
+
+  const handleSortOrderChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSortOrder(e.target.value);
+  };
+
+  const sortedTodos = [...todos].sort((a, b) => {
+    if (sortOption === "priority") {
+      return sortOrder === "asc"
+        ? a.priority - b.priority
+        : b.priority - a.priority;
+    } else if (sortOption === "deadline") {
+      if (a.deadline && b.deadline) {
+        return sortOrder === "asc"
+          ? new Date(a.deadline).getTime() - new Date(b.deadline).getTime()
+          : new Date(b.deadline).getTime() - new Date(a.deadline).getTime();
+      } else if (a.deadline) {
+        return sortOrder === "asc" ? -1 : 1;
+      } else if (b.deadline) {
+        return sortOrder === "asc" ? 1 : -1;
+      } else {
+        return 0;
+      }
+    }
+    return 0;
+  });
+
   return (
     <div className="mx-4 mt-10 max-w-2xl md:mx-auto">
       <h1 className="mb-4 text-2xl font-bold">TodoApp</h1>
       <p className="mb-4 text-lg">未完了のタスク: {uncompletedCount}</p>
+      <div className="flex justify-between mb-4">
+        <div className="flex items-center space-x-2">
+          <label htmlFor="sortOption" className="font-bold">
+            ソート:
+          </label>
+          <select
+            id="sortOption"
+            value={sortOption}
+            onChange={handleSortOptionChange}
+            className="rounded-md border p-2"
+          >
+            <option value="priority">優先度順</option>
+            <option value="deadline">期限順</option>
+          </select>
+          <select
+            id="sortOrder"
+            value={sortOrder}
+            onChange={handleSortOrderChange}
+            className="rounded-md border p-2"
+          >
+            <option value="asc">昇順</option>
+            <option value="desc">降順</option>
+          </select>
+        </div>
+      </div>
       <TodoList
-        todos={todos}
+        todos={sortedTodos}
         updateIsDone={updateIsDone}
         remove={remove}
         edit={edit}

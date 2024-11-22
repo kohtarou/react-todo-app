@@ -48,7 +48,7 @@ const TodoItem = (props: Props) => {
         <div className="text-base">
           <FontAwesomeIcon icon={faBalanceScale} />
           <span className="ml-1">優先度</span>
-          <span className="ml-2 space-x-0.5 text-orange-400">
+          <span className="ml-2 space-x-0.5 text-orange-400 scale-115">
             {num2star(todo.priority)}
           </span>
         </div>
