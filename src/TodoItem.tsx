@@ -45,11 +45,13 @@ const TodoItem = (props: Props) => {
           <label className="mr-4 font-bold text-lg">{todo.name}</label>
         </div>
         <div className="text-base mt-1">
-          進捗: {todo.progress === 0 ? "0%" : `${todo.progress}%`}
+          進捗: {todo.progress !== undefined ? `${todo.progress}%` : "0%"}
           <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 mt-1">
             <div
               className="bg-blue-600 h-2.5 rounded-full"
-              style={{ width: `${todo.progress}%` }}
+              style={{
+                width: `${todo.progress !== undefined ? todo.progress : 0}%`,
+              }}
             ></div>
           </div>
         </div>
