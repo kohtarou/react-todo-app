@@ -194,26 +194,26 @@ const App = () => {
             onChange={handleSortOrderChange}
             className="rounded-md border p-2"
           >
-            <option value="asc">昇順</option>
-            <option value="desc">降順</option>
+            <option value="asc font-bold">昇順</option>
+            <option value="desc font-bold">降順</option>
           </select>
         </div>
         <div className="flex items-center space-x-2">
           <button
             type="button"
             onClick={() => handleSortOptionChange("priority")}
-            className={`rounded-md px-3 py-1 font-bold text-white ${
+            className={`rounded-md px-3 py-1 font-bold text-black ${
               sortOption === "priority" ? "bg-[#F4F4FF]" : "bg-[#F4F4F4]"
-            } hover:bg-blue-600`}
+            } hover:bg-[#F4F4FF]`}
           >
             優先度順
           </button>
           <button
             type="button"
             onClick={() => handleSortOptionChange("deadline")}
-            className={`rounded-md px-3 py-1 font-bold text-white ${
+            className={`rounded-md px-3 py-1 font-bold text-black ${
               sortOption === "deadline" ? "bg-[#F4F4FF]" : "bg-[#F4F4F4]"
-            } hover:bg-blue-600`}
+            } hover:bg-[#F4F4FF]`}
           >
             期限順
           </button>
