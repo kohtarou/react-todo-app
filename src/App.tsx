@@ -203,7 +203,7 @@ const App = () => {
             type="button"
             onClick={() => handleSortOptionChange("priority")}
             className={`rounded-md px-3 py-1 font-bold text-white ${
-              sortOption === "priority" ? "bg-blue-500" : "bg-gray-500"
+              sortOption === "priority" ? "bg-[#F4F4FF]" : "bg-[#F4F4F4]"
             } hover:bg-blue-600`}
           >
             優先度順
@@ -212,7 +212,7 @@ const App = () => {
             type="button"
             onClick={() => handleSortOptionChange("deadline")}
             className={`rounded-md px-3 py-1 font-bold text-white ${
-              sortOption === "deadline" ? "bg-blue-500" : "bg-gray-500"
+              sortOption === "deadline" ? "bg-[#F4F4FF]" : "bg-[#F4F4F4]"
             } hover:bg-blue-600`}
           >
             期限順

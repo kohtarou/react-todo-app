@@ -55,7 +55,7 @@ const TodoItem = (props: Props) => {
         {todo.deadline && (
           <div className="text-base">
             <FontAwesomeIcon icon={faClock} className="mr-1" /> 期限:{" "}
-            {dayjs(todo.deadline).format("YYYY/M/D HH:mm")}
+            {dayjs(todo.deadline).format("YYYY/MM/DD HH:mm")}
           </div>
         )}
       </div>
