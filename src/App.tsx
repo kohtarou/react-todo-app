@@ -16,6 +16,7 @@ const App = () => {
   const [newTodoName, setNewTodoName] = useState("");
   const [newTodoPriority, setNewTodoPriority] = useState(3);
   const [newTodoDeadline, setNewTodoDeadline] = useState<Date | null>(null);
+  const [newTodoProgress, setNewTodoProgress] = useState<number>(0); // 追加
   const [newTodoNameError, setNewTodoNameError] = useState("");
   const [editTodoId, setEditTodoId] = useState<string | null>(null); // 追加
   const [showAddTodo, setShowAddTodo] = useState(false); // 追加
@@ -70,6 +71,10 @@ const App = () => {
     setNewTodoDeadline(dt === "" ? null : new Date(dt));
   };
 
+  const updateProgress = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewTodoProgress(Number(e.target.value));
+  };
+
   const updateIsDone = (id: string, value: boolean) => {
     const updatedTodos = todos.map((todo) => {
       if (todo.id === id) {
@@ -97,6 +102,7 @@ const App = () => {
       setNewTodoName(todoToEdit.name);
       setNewTodoPriority(todoToEdit.priority);
       setNewTodoDeadline(todoToEdit.deadline);
+      setNewTodoProgress(todoToEdit.progress); // 追加
       setEditTodoId(id); // 編集モードに入るためのIDを設定
       setShowAddTodo(true); // 追加画面を表示
     }
@@ -118,6 +124,7 @@ const App = () => {
               name: newTodoName,
               priority: newTodoPriority,
               deadline: newTodoDeadline,
+              progress: newTodoProgress, // 追加
             }
           : todo
       );
@@ -131,6 +138,7 @@ const App = () => {
         isDone: false,
         priority: newTodoPriority,
         deadline: newTodoDeadline,
+        progress: newTodoProgress, // 追加
       };
       const updatedTodos = [...todos, newTodo];
       setTodos(updatedTodos);
@@ -139,6 +147,7 @@ const App = () => {
     setNewTodoName("");
     setNewTodoPriority(3);
     setNewTodoDeadline(null);
+    setNewTodoProgress(0); // 追加
     setShowAddTodo(false); // 追加画面を非表示
   };
 
@@ -146,6 +155,7 @@ const App = () => {
     setNewTodoName("");
     setNewTodoPriority(3);
     setNewTodoDeadline(null);
+    setNewTodoProgress(0); // 追加
     setEditTodoId(null); // 編集モードをリセット
     setShowAddTodo(true); // 追加画面を表示
   };
@@ -194,26 +204,26 @@ const App = () => {
             onChange={handleSortOrderChange}
             className="rounded-md border p-2"
           >
-            <option value="asc font-bold">昇順</option>
-            <option value="desc font-bold">降順</option>
+            <option value="asc">昇順</option>
+            <option value="desc">降順</option>
           </select>
         </div>
         <div className="flex items-center space-x-2">
           <button
             type="button"
             onClick={() => handleSortOptionChange("priority")}
-            className={`rounded-md px-3 py-1 font-bold text-black ${
-              sortOption === "priority" ? "bg-[#F4F4FF]" : "bg-[#F4F4F4]"
-            } hover:bg-[#F4F4FF]`}
+            className={`rounded-md px-3 py-1 font-bold text-white ${
+              sortOption === "priority" ? "bg-blue-500" : "bg-gray-500"
+            } hover:bg-blue-600`}
           >
             優先度順
           </button>
           <button
             type="button"
             onClick={() => handleSortOptionChange("deadline")}
-            className={`rounded-md px-3 py-1 font-bold text-black ${
-              sortOption === "deadline" ? "bg-[#F4F4FF]" : "bg-[#F4F4F4]"
-            } hover:bg-[#F4F4FF]`}
+            className={`rounded-md px-3 py-1 font-bold text-white ${
+              sortOption === "deadline" ? "bg-blue-500" : "bg-gray-500"
+            } hover:bg-blue-600`}
           >
             期限順
           </button>
@@ -308,20 +318,34 @@ const App = () => {
                 className="rounded-md border border-gray-400 px-2 py-0.5"
               />
             </div>
+            <div className="flex items-center gap-x-2 mb-4">
+              <label htmlFor="progress" className="font-bold">
+                進捗
+              </label>
+              <input
+                type="number"
+                id="progress"
+                value={newTodoProgress}
+                onChange={updateProgress}
+                className="rounded-md border border-gray-400 px-2 py-0.5"
+                min="0"
+                max="100"
+              />
+            </div>
             <div className="flex justify-end space-x-2">
-              <button
-                type="button"
-                onClick={addNewTodo}
-                className="rounded-md bg-indigo-500 px-3 py-1 font-bold text-white hover:bg-indigo-600"
-              >
-                {editTodoId ? "更新" : "追加"}
-              </button>
               <button
                 type="button"
                 onClick={() => setShowAddTodo(false)} // 追加画面を非表示
                 className="rounded-md bg-gray-500 px-3 py-1 font-bold text-white hover:bg-gray-600"
               >
                 キャンセル
+              </button>
+              <button
+                type="button"
+                onClick={addNewTodo}
+                className="rounded-md bg-indigo-500 px-3 py-1 font-bold text-white hover:bg-indigo-600"
+              >
+                {editTodoId ? "更新" : "追加"}
               </button>
             </div>
           </div>
