@@ -19,6 +19,8 @@ type Props = {
   deadline: Date | null;
 };
 
+const num2star = (n: number): string => "✦".repeat(4 - n);
+
 const TodoItem = (props: Props) => {
   const todo = props.todo;
 
@@ -45,7 +47,10 @@ const TodoItem = (props: Props) => {
       <div className="flex flex-col items-start mx-4">
         <div className="text-base">
           <FontAwesomeIcon icon={faBalanceScale} />
-          優先度: {todo.priority}
+          優先度
+        </div>
+        <div className="space-x-0.5 text-orange-400">
+          {num2star(todo.priority)}
         </div>
         {todo.deadline && (
           <div className="text-base">
