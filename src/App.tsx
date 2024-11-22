@@ -19,7 +19,7 @@ const App = () => {
   const [newTodoNameError, setNewTodoNameError] = useState("");
   const [editTodoId, setEditTodoId] = useState<string | null>(null); // 追加
   const [showAddTodo, setShowAddTodo] = useState(false); // 追加
-  const [sortOption, setSortOption] = useState<string>("priority"); // 追加
+  const [sortOption, setSortOption] = useState<string | null>(null); // 変更
   const [sortOrder, setSortOrder] = useState<string>("asc"); // 追加
 
   const [initialized, setInitialized] = useState(false);
@@ -150,8 +150,8 @@ const App = () => {
     setShowAddTodo(true); // 追加画面を表示
   };
 
-  const handleSortOptionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSortOption(e.target.value);
+  const handleSortOptionChange = (option: string) => {
+    setSortOption(option);
   };
 
   const handleSortOrderChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -185,18 +185,9 @@ const App = () => {
       <p className="mb-4 text-lg">未完了のタスク: {uncompletedCount}</p>
       <div className="flex justify-between mb-4">
         <div className="flex items-center space-x-2">
-          <label htmlFor="sortOption" className="font-bold">
-            ソート:
+          <label htmlFor="sortOrder" className="font-bold">
+            ソート順:
           </label>
-          <select
-            id="sortOption"
-            value={sortOption}
-            onChange={handleSortOptionChange}
-            className="rounded-md border p-2"
-          >
-            <option value="priority">優先度順</option>
-            <option value="deadline">期限順</option>
-          </select>
           <select
             id="sortOrder"
             value={sortOrder}
@@ -206,6 +197,26 @@ const App = () => {
             <option value="asc">昇順</option>
             <option value="desc">降順</option>
           </select>
+        </div>
+        <div className="flex items-center space-x-2">
+          <button
+            type="button"
+            onClick={() => handleSortOptionChange("priority")}
+            className={`rounded-md px-3 py-1 font-bold text-white ${
+              sortOption === "priority" ? "bg-blue-500" : "bg-gray-500"
+            } hover:bg-blue-600`}
+          >
+            優先度順
+          </button>
+          <button
+            type="button"
+            onClick={() => handleSortOptionChange("deadline")}
+            className={`rounded-md px-3 py-1 font-bold text-white ${
+              sortOption === "deadline" ? "bg-blue-500" : "bg-gray-500"
+            } hover:bg-blue-600`}
+          >
+            期限順
+          </button>
         </div>
       </div>
       <TodoList
@@ -300,17 +311,17 @@ const App = () => {
             <div className="flex justify-end space-x-2">
               <button
                 type="button"
-                onClick={() => setShowAddTodo(false)} // 追加画面を非表示
-                className="rounded-md bg-gray-500 px-3 py-1 font-bold text-white hover:bg-gray-600"
-              >
-                キャンセル
-              </button>
-              <button
-                type="button"
                 onClick={addNewTodo}
                 className="rounded-md bg-indigo-500 px-3 py-1 font-bold text-white hover:bg-indigo-600"
               >
                 {editTodoId ? "更新" : "追加"}
+              </button>
+              <button
+                type="button"
+                onClick={() => setShowAddTodo(false)} // 追加画面を非表示
+                className="rounded-md bg-gray-500 px-3 py-1 font-bold text-white hover:bg-gray-600"
+              >
+                キャンセル
               </button>
             </div>
           </div>
