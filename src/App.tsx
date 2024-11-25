@@ -9,7 +9,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTriangleExclamation,
   faPlus,
-} from "@fortawesome/free-solid-svg-icons"; // faPlus アイコンを追加
+  faArrowDownWideShort,
+  faArrowDownShortWide,
+  faSort,
+} from "@fortawesome/free-solid-svg-icons"; // アイコンを追加
 
 const App = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -196,6 +199,7 @@ const App = () => {
       <div className="flex justify-between mb-4">
         <div className="flex items-center space-x-2">
           <label htmlFor="sortOrder" className="font-bold">
+            <FontAwesomeIcon icon={faArrowDownShortWide} className="mr-1" />
             ソート順:
           </label>
           <select
@@ -204,8 +208,14 @@ const App = () => {
             onChange={handleSortOrderChange}
             className="rounded-md border p-2"
           >
-            <option value="asc">昇順</option>
-            <option value="desc">降順</option>
+            <option value="asc">
+              <FontAwesomeIcon icon={faArrowDownShortWide} className="mr-1" />
+              昇順
+            </option>
+            <option value="desc">
+              <FontAwesomeIcon icon={faArrowDownWideShort} className="mr-1" />
+              降順
+            </option>
           </select>
         </div>
         <div className="flex items-center space-x-2">
@@ -216,6 +226,7 @@ const App = () => {
               sortOption === "priority" ? "bg-blue-500" : "bg-gray-500"
             } hover:bg-blue-600`}
           >
+            <FontAwesomeIcon icon={faSort} className="mr-1" />
             優先度順
           </button>
           <button
@@ -225,6 +236,7 @@ const App = () => {
               sortOption === "deadline" ? "bg-blue-500" : "bg-gray-500"
             } hover:bg-blue-600`}
           >
+            <FontAwesomeIcon icon={faSort} className="mr-1" />
             期限順
           </button>
         </div>
