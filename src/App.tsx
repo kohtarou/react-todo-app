@@ -174,8 +174,8 @@ const App = () => {
   const sortedTodos = [...todos].sort((a, b) => {
     if (sortOption === "priority") {
       return sortOrder === "asc"
-        ? a.priority - b.priority
-        : b.priority - a.priority;
+        ? b.priority - a.priority
+        : a.priority - b.priority;
     } else if (sortOption === "deadline") {
       if (a.deadline && b.deadline) {
         return sortOrder === "asc"
