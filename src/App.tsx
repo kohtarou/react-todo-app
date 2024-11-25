@@ -194,7 +194,9 @@ const App = () => {
 
   return (
     <div className="mx-4 mt-10 max-w-2xl md:mx-auto">
-      <h1 className="mb-4 text-2xl font-bold">TodoApp</h1>
+      <h1 className="mb-4 text-3xl font-extrabold text-center text-indigo-600">
+        TodoApp
+      </h1>
       <p className="mb-4 text-lg">未完了のタスク: {uncompletedCount}</p>
       <div className="flex justify-between mb-4">
         <div className="flex items-center space-x-2">

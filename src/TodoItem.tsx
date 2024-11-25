@@ -26,7 +26,7 @@ const TodoItem = (props: Props) => {
   return (
     <div
       className="relative flex justify-between items-center p-2 border border-[#303030] rounded-[10px]"
-      style={{ boxShadow: "3px 3px 10px 0px #6e6e6e" }} // インラインスタイルを追加
+      style={{ boxShadow: "0px 4px 8px -4px #777777" }} // インラインスタイルを追加
     >
       <button
         onClick={() => props.remove(todo.id)}
