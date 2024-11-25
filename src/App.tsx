@@ -199,24 +199,20 @@ const App = () => {
       <div className="flex justify-between mb-4">
         <div className="flex items-center space-x-2">
           <label htmlFor="sortOrder" className="font-bold">
-            <FontAwesomeIcon icon={faArrowDownShortWide} className="mr-1" />
             ソート順:
           </label>
-          <select
-            id="sortOrder"
-            value={sortOrder}
-            onChange={handleSortOrderChange}
-            className="rounded-md border p-2"
-          >
-            <option value="asc">
-              <FontAwesomeIcon icon={faArrowDownShortWide} className="mr-1" />
-              昇順
-            </option>
-            <option value="desc">
-              <FontAwesomeIcon icon={faArrowDownWideShort} className="mr-1" />
-              降順
-            </option>
-          </select>
+          <div className="flex items-center">
+            <FontAwesomeIcon icon={faArrowDownShortWide} className="mr-1" />
+            <select
+              id="sortOrder"
+              value={sortOrder}
+              onChange={handleSortOrderChange}
+              className="rounded-md border p-2"
+            >
+              <option value="asc">昇順</option>
+              <option value="desc">降順</option>
+            </select>
+          </div>
         </div>
         <div className="flex items-center space-x-2">
           <button
