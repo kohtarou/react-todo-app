@@ -327,7 +327,7 @@ const App = () => {
                 id="progress"
                 value={newTodoProgress}
                 onChange={updateProgress}
-                className="rounded-md border border-gray-400 px-2 py-0.5"
+                className="rounded-md border border-gray-400 py-0.5"
                 min="0"
                 max="100"
               />
