@@ -323,7 +323,7 @@ const App = () => {
                 進捗
               </label>
               <input
-                type="number"
+                type="range"
                 id="progress"
                 value={newTodoProgress}
                 onChange={updateProgress}
@@ -331,6 +331,7 @@ const App = () => {
                 min="0"
                 max="100"
               />
+              <span>{newTodoProgress}%</span>
             </div>
             <div className="flex justify-end space-x-2">
               <button
