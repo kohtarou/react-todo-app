@@ -10,6 +10,7 @@ import {
   faTriangleExclamation,
   faPlus,
   faArrowDownShortWide,
+  faArrowDownWideShort,
   faSort,
 } from "@fortawesome/free-solid-svg-icons"; // アイコンを追加
 
@@ -201,7 +202,14 @@ const App = () => {
             ソート順:
           </label>
           <div className="flex items-center">
-            <FontAwesomeIcon icon={faArrowDownShortWide} className="mr-1" />
+            <FontAwesomeIcon
+              icon={
+                sortOrder === "asc"
+                  ? faArrowDownShortWide
+                  : faArrowDownWideShort
+              }
+              className="mr-1"
+            />
             <select
               id="sortOrder"
               value={sortOrder}
