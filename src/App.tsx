@@ -9,7 +9,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTriangleExclamation,
   faPlus,
-  faArrowDownWideShort,
   faArrowDownShortWide,
   faSort,
 } from "@fortawesome/free-solid-svg-icons"; // アイコンを追加
