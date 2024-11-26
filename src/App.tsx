@@ -8,10 +8,11 @@ import { twMerge } from "tailwind-merge";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTriangleExclamation,
-  faPlus,
+  faDownload,
   faArrowDownShortWide,
   faArrowDownWideShort,
   faSort,
+  faTrash,
 } from "@fortawesome/free-solid-svg-icons"; // アイコンを追加
 
 const App = () => {
@@ -256,8 +257,8 @@ const App = () => {
           onClick={handleAddTodoClick} // 追加画面を表示
           className="flex items-center justify-center rounded-md bg-indigo-500 px-3 py-1 font-bold text-white hover:bg-indigo-600"
         >
-          <FontAwesomeIcon icon={faPlus} className="mr-2" />{" "}
-          {/* アイコンを追加 */}
+          <FontAwesomeIcon icon={faDownload} className="mr-2" />{" "}
+          {/* アイコンを変更 */}
           Todoの追加
         </button>
         <button
@@ -265,6 +266,8 @@ const App = () => {
           onClick={removeCompletedTodos}
           className="ml-4 rounded-md bg-red-500 px-3 py-1 font-bold text-white hover:bg-red-600"
         >
+          <FontAwesomeIcon icon={faTrash} className="mr-2" />{" "}
+          {/* アイコンを追加 */}
           完了済みのタスクを削除
         </button>
       </div>
